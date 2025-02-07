@@ -24,5 +24,27 @@ This example demonstrates the core idea of the Strategy Pattern. You can apply i
 
 ![image](https://github.com/user-attachments/assets/b1837c77-fe4f-470f-b485-9983dabbf94a)
 
+5. APIs in the example:
+
+   a. api: /lld/design-pattern/strategy-design-pattern/shipping
+   
+   b. payload (values of properties can be changed): Array of {name, price}
+
+   ex. [{ "name": "Show Piece", "price": 300 }, { "name": "Wall Paper", "price": 1000	},	{ "name": "Door Mat", "price": 100 }]
+   
+   c. query params: shippingMode=one-day || shippingMode=express || shippingMode=null
+   
+   d. url preview:
+
+   	i. shippingMode=one-day: 
+         http://localhost:8080/lld/design-pattern/observer-design-pattern/?shippingMode=one-day
+   
+      ii. shippingMode=express: 
+          http://localhost:8080/lld/design-pattern/observer-design-pattern/?shippingMode=express
+   
+      iii. shippingMode=null: 
+           http://localhost:8080/lld/design-pattern/observer-design-pattern/?shippingMode=null
+
+
 
 
