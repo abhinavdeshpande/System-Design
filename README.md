@@ -27,13 +27,14 @@ List of APIs:
    a. api: /lld/design-pattern/strategy-design-pattern/shipping
    
    b. payload (values of properties can be changed): Array of {name, price}
+
    ex. [{ "name": "Show Piece", "price": 300 }, { "name": "Wall Paper", "price": 1000	},	{ "name": "Door Mat", "price": 100 }]
    
    c. query params: shippingMode=one-day || shippingMode=express || shippingMode=null
    
    d. url preview:
-   
-      i. shippingMode=one-day: 
+
+   	i. shippingMode=one-day: 
          http://localhost:8080/lld/design-pattern/observer-design-pattern/?shippingMode=one-day
    
       ii. shippingMode=express: 
