@@ -53,15 +53,15 @@ This example demonstrates the core idea of the Strategy Pattern. You can apply i
 
 	  i. shippingMode=one-day:
    
-         http://localhost:8080/lld/design-pattern/observer-design-pattern/?shippingMode=one-day
+         http://localhost:8080/lld/design-pattern/strategy-design-pattern/shipping?shippingMode=one-day
    
      ii. shippingMode=express:
    
-          http://localhost:8080/lld/design-pattern/observer-design-pattern/?shippingMode=express
+          http://localhost:8080/lld/design-pattern/strategy-design-pattern/shipping?shippingMode=express
    
      iii. shippingMode=null:
    
-           http://localhost:8080/lld/design-pattern/observer-design-pattern/?shippingMode=null
+           http://localhost:8080/lld/design-pattern/strategy-design-pattern/shipping?shippingMode=null
 
 
 
