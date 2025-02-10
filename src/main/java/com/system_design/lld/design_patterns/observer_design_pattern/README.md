@@ -31,8 +31,6 @@ Let's say you have a **WeatherData** object (subject) that tracks temperature, h
 
 ## Project Structure
 
-## Project Structure
-
 ```
 com.system_design.lld.design_patterns.observer_design_pattern
 │── dao
