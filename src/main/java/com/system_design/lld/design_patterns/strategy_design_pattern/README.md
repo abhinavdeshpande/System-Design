@@ -64,51 +64,17 @@ com.system_design.lld.design_patterns.strategy_design_pattern
 3. The total cost is calculated based on the item prices and the selected shipping strategy.
 
 ## API Endpoint
-
-### **Endpoint**
-   ```sh
-   GET /strategy-design-pattern/shipping
+```sh
+   GET /strategy-design-pattern/shipping?shippingMode=express
    ```
 
-### **Request Payload (JSON)**
-```json
-[
-    {
-        "name": "Show Piece",
-        "price": 300
-    },
-    {
-        "name": "Wall Paper",
-        "price": 1000
-    },
-    {
-        "name": "Door Mat",
-        "price": 100
-    }
-]
-```
+```sh
+   GET /strategy-design-pattern/shipping?shippingMode=one-day
+   ```
 
-### **Query Parameters**
-- `shippingMode=one-day`
-- `shippingMode=express`
-- `shippingMode=null` (defaults to Standard Shipping)
-
-### **URL Preview**
-
-- **One-Day Shipping:**
-  ```sh
-  http://localhost:8080/strategy-design-pattern/shipping?shippingMode=one-day
-  ```
-
-- **Express Shipping:**
-  ```sh
-  http://localhost:8080/strategy-design-pattern/shipping?shippingMode=express
-  ```
-
-- **Standard Shipping (Default):**
-  ```sh
-  http://localhost:8080/strategy-design-pattern/shipping?shippingMode=null
-  ```
+```sh
+   GET /strategy-design-pattern/shipping?shippingMode=null
+   ```
 ---
 Happy Coding! 🚀
 
