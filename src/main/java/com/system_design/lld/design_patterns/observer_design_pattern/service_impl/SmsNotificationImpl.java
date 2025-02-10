@@ -10,6 +10,7 @@ public class SmsNotificationImpl implements NotificationStrategy {
     @Override
     public NotificationMode notifyUser(UserDto user) {
         System.out.println("SMS Notification triggered for user: " + user);
+        // Logic to send SMS notification
         return NotificationMode.SMS;
     }
 }

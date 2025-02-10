@@ -10,6 +10,7 @@ public class EmailNotificationImpl implements NotificationStrategy {
     @Override
     public NotificationMode notifyUser(UserDto user) {
         System.out.println("Email Notification triggered for user: " + user);
+        // Logic to send email notification
         return NotificationMode.EMAIL;
     }
 }

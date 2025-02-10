@@ -10,6 +10,7 @@ public class WhatsAppNotificationImpl implements NotificationStrategy {
     @Override
     public NotificationMode notifyUser(UserDto user) {
         System.out.println("WhatsApp Notification triggered for user: " + user);
+        // Logic to send WhatsApp notification
         return NotificationMode.WHATSAPP;
     }
 }
