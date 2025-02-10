@@ -1,68 +1,114 @@
+# Strategy Design Pattern in Java Spring Boot
+
 Let's break down the Strategy Design Pattern in a simple way, with an easy example and a visual representation.
 
-1. What is the Strategy Pattern?
+## What is the Strategy Pattern?
 
-   The Strategy Pattern lets you define a family of algorithms (or strategies) and make them interchangeable at runtime.  Instead of hardcoding a specific behavior into your class, you can choose which algorithm to use dynamically.  This makes your code more flexible and easier to maintain.
+The Strategy Pattern lets you define a family of algorithms (or strategies) and make them interchangeable at runtime.  Instead of hardcoding a specific behavior into your class, you can choose which algorithm to use dynamically.  This makes your code more flexible and easier to maintain.
 
-2. Analogy:
+## Analogy
 
-   Imagine you're traveling. You might choose different modes of transportation (strategies) depending on the distance, cost, and your preferences: walking, taking a bus, or flying in a plane.  The Strategy Pattern is like having a system that can dynamically choose the best transportation strategy for your trip.
+Imagine you're traveling. You might choose different modes of transportation (strategies) depending on the distance, cost, and your preferences: walking, taking a bus, or flying in a plane.  The Strategy Pattern is like having a system that can dynamically choose the best transportation strategy for your trip.
 
-3. Benefits of the Strategy Pattern:
+## Benefits of the Strategy Pattern:
 
-   a. Flexibility: You can easily add new strategies without modifying the Order class.
-   
-   b. Maintainability: The code is more organized and easier to understand. Each strategy is encapsulated in its own class.
-   
-   c. Reusability: Strategies can be reused in other parts of your application.
-   
-   d. Open/Closed Principle: You can add new strategies without modifying existing code.
+- Flexibility: You can easily add new strategies without modifying the Order class.
+- Maintainability: The code is more organized and easier to understand. Each strategy is encapsulated in its own class.
+- Reusability: Strategies can be reused in other parts of your application.
+- Open/Closed Principle: You can add new strategies without modifying existing code.
    
 This example demonstrates the core idea of the Strategy Pattern. You can apply it to various situations where you need to choose between different algorithms or behaviors at runtime.  Remember to adapt the example to your specific needs and programming language.
 
-4. Visual Representation of this Example:
+## Overview
 
-![image](https://github.com/user-attachments/assets/b1837c77-fe4f-470f-b485-9983dabbf94a)
+This project demonstrates the **Strategy Design Pattern** using **Java Spring Boot**. The Strategy Pattern allows selecting an algorithm's behavior at runtime. Here, we use different shipping strategies for calculating the total order cost dynamically.
 
-5. APIs in the example:
+## Project Structure
 
-   a. api: /lld/design-pattern/strategy-design-pattern/shipping
-   
-   b. payload (values of properties can be changed): Array of {name, price}
+```
+com.system_design.lld.design_patterns.strategy_design_pattern
+│── dto
+│   ├── Item.java
+│   ├── Order.java
+│── rest_controller
+│   ├── StrategyDPRestController.java
+│── service
+│   ├── ShippingStrategy.java
+│── service_impl
+│   ├── ExpressShipping.java
+│   ├── OneDayShipping.java
+│   ├── StandardShipping.java
+```
 
-   ex.
+## Components Breakdown
 
-   		[
-   			{
-   				"name": "Show Piece",
-   				"price": 300
-   			},
-   			{
-   				"name": "Wall Paper",
-   				"price": 1000
-   			},
-   			{
-   				"name": "Door Mat",
-   				"price": 100
-   			}
-   		]
-   
-   c. query params: shippingMode=one-day || shippingMode=express || shippingMode=null
-   
-   d. url preview:
+### 1. DTO (Data Transfer Objects)
+- **Item.java**: Represents an item in the order.
+- **Order.java**: Represents an order containing multiple items and applies a chosen shipping strategy.
 
-	  i. shippingMode=one-day:
-   
-         http://localhost:8080/lld/design-pattern/strategy-design-pattern/shipping?shippingMode=one-day
-   
-     ii. shippingMode=express:
-   
-          http://localhost:8080/lld/design-pattern/strategy-design-pattern/shipping?shippingMode=express
-   
-     iii. shippingMode=null:
-   
-           http://localhost:8080/lld/design-pattern/strategy-design-pattern/shipping?shippingMode=null
+### 2. Service Interface
+- **ShippingStrategy.java**: Defines a contract for different shipping strategies.
 
+### 3. Service Implementations
+- **ExpressShipping.java**: Implements express shipping with a fixed cost of Rs. 50.
+- **OneDayShipping.java**: Implements one-day shipping with a fixed cost of Rs. 100.
+- **StandardShipping.java**: Implements standard shipping with a fixed cost of Rs. 10.
 
+### 4. REST Controller
+- **StrategyDPRestController.java**: Exposes an API endpoint for applying different shipping strategies dynamically.
 
+## How It Works
+
+1. The client sends a request with a list of items and a selected `shippingMode`.
+2. The controller dynamically assigns the appropriate shipping strategy.
+3. The total cost is calculated based on the item prices and the selected shipping strategy.
+
+## API Endpoint
+
+### **Endpoint**
+   ```sh
+   GET /strategy-design-pattern/shipping
+   ```
+
+### **Request Payload (JSON)**
+```json
+[
+    {
+        "name": "Show Piece",
+        "price": 300
+    },
+    {
+        "name": "Wall Paper",
+        "price": 1000
+    },
+    {
+        "name": "Door Mat",
+        "price": 100
+    }
+]
+```
+
+### **Query Parameters**
+- `shippingMode=one-day`
+- `shippingMode=express`
+- `shippingMode=null` (defaults to Standard Shipping)
+
+### **URL Preview**
+
+- **One-Day Shipping:**
+  ```sh
+  http://localhost:8080/strategy-design-pattern/shipping?shippingMode=one-day
+  ```
+
+- **Express Shipping:**
+  ```sh
+  http://localhost:8080/strategy-design-pattern/shipping?shippingMode=express
+  ```
+
+- **Standard Shipping (Default):**
+  ```sh
+  http://localhost:8080/strategy-design-pattern/shipping?shippingMode=null
+  ```
+---
+Happy Coding! 🚀
 
