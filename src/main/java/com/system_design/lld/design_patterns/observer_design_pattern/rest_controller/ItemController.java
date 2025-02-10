@@ -1,14 +1,15 @@
 package com.system_design.lld.design_patterns.observer_design_pattern.rest_controller;
 
 import com.system_design.lld.design_patterns.observer_design_pattern.dto.ItemDto;
+import com.system_design.lld.design_patterns.observer_design_pattern.dto.UserDto;
 import com.system_design.lld.design_patterns.observer_design_pattern.service.ManageItem;
+import com.system_design.lld.design_patterns.observer_design_pattern.util.NotificationMode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -34,7 +35,7 @@ public class ItemController {
     }
 
     @PutMapping("/detail")
-    public ResponseEntity<ItemDto> updateItemDetail(@RequestBody ItemDto item) {
+    public ResponseEntity<Map<UserDto, List<NotificationMode>>> updateItemDetail(@RequestBody ItemDto item) {
         return manageItem.updateItemDetail(item);
     }
 
