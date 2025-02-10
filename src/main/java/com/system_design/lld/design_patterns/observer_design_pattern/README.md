@@ -58,7 +58,7 @@ com.system_design.lld.design_patterns.observer_design_pattern
 │   ├── NotificationMode.java
 ```
 
-## File Details
+## Components Breakdown
 
 ### **DAO Layer**
 - **ItemDao.java**: Repository for managing `ItemDto` in MongoDB.
