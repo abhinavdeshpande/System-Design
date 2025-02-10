@@ -1,13 +1,11 @@
 package com.system_design.lld.design_patterns.strategy_design_pattern.dto;
 
 import com.system_design.lld.design_patterns.strategy_design_pattern.service.ShippingStrategy;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class Order {
     private List<Item> items;
     private ShippingStrategy shippingStrategy;
