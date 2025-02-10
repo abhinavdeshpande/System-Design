@@ -2,14 +2,17 @@ package com.system_design.lld.design_patterns.observer_design_pattern.service_im
 
 import com.system_design.lld.design_patterns.observer_design_pattern.dao.ItemDao;
 import com.system_design.lld.design_patterns.observer_design_pattern.dto.ItemDto;
+import com.system_design.lld.design_patterns.observer_design_pattern.dto.UserDto;
 import com.system_design.lld.design_patterns.observer_design_pattern.service.ItemSubject;
 import com.system_design.lld.design_patterns.observer_design_pattern.service.ManageItem;
+import com.system_design.lld.design_patterns.observer_design_pattern.util.NotificationMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -37,13 +40,13 @@ public class ManageItemImpl implements ManageItem {
     }
 
     @Override
-    public ResponseEntity<ItemDto> updateItemDetail(ItemDto item) {
+    public ResponseEntity<Map<UserDto, List<NotificationMode>>> updateItemDetail(ItemDto item) {
         ItemDto itemPriorUpdate = Objects.requireNonNull(getItemDetail(item.getId()).getBody()).get();
         ItemDto itemAfterUpdate = itemDao.save(item);
         if (itemAfterUpdate.isActive() && itemPriorUpdate.getItemQuantity() == 0 && !itemPriorUpdate.isActive()) {
-            itemSubject.notifyObservers(item.getId());
+            return new ResponseEntity<>(itemSubject.notifyObservers(item.getId()), HttpStatus.OK);
         }
-        return new ResponseEntity<>(item, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
