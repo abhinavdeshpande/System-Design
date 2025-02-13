@@ -1,8 +1,8 @@
 package com.system_design.lld.design_patterns.observer_design_pattern.service_impl;
 
 import com.system_design.lld.design_patterns.observer_design_pattern.dao.ItemDao;
-import com.system_design.lld.design_patterns.observer_design_pattern.dto.ItemDto;
-import com.system_design.lld.design_patterns.observer_design_pattern.dto.UserDto;
+import com.system_design.lld.design_patterns.observer_design_pattern.entity.ItemEntity;
+import com.system_design.lld.design_patterns.observer_design_pattern.entity.UserEntity;
 import com.system_design.lld.design_patterns.observer_design_pattern.service.ItemSubject;
 import com.system_design.lld.design_patterns.observer_design_pattern.service.ManageItem;
 import com.system_design.lld.design_patterns.observer_design_pattern.util.NotificationMode;
@@ -25,24 +25,24 @@ public class ManageItemImpl implements ManageItem {
     ItemSubject itemSubject;
 
     @Override
-    public ResponseEntity<ItemDto> addItem(ItemDto item) {
+    public ResponseEntity<ItemEntity> addItem(ItemEntity item) {
         return new ResponseEntity<>(itemDao.insert(item), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<ItemDto> removeItem(ItemDto item) {
+    public ResponseEntity<ItemEntity> removeItem(ItemEntity item) {
         return new ResponseEntity<>(itemDao.save(item), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<ItemDto>> getAllItems() {
+    public ResponseEntity<List<ItemEntity>> getAllItems() {
         return new ResponseEntity<>(itemDao.findAll(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Map<UserDto, List<NotificationMode>>> updateItemDetail(ItemDto item) {
-        ItemDto itemPriorUpdate = Objects.requireNonNull(getItemDetail(item.getId()).getBody()).get();
-        ItemDto itemAfterUpdate = itemDao.save(item);
+    public ResponseEntity<Map<UserEntity, List<NotificationMode>>> updateItemDetail(ItemEntity item) {
+        ItemEntity itemPriorUpdate = Objects.requireNonNull(getItemDetail(item.getId()).getBody()).get();
+        ItemEntity itemAfterUpdate = itemDao.save(item);
         if (itemAfterUpdate.isActive() && itemPriorUpdate.getItemQuantity() == 0 && !itemPriorUpdate.isActive()) {
             return new ResponseEntity<>(itemSubject.notifyObservers(item.getId()), HttpStatus.OK);
         }
@@ -50,7 +50,7 @@ public class ManageItemImpl implements ManageItem {
     }
 
     @Override
-    public ResponseEntity<Optional<ItemDto>> getItemDetail(String itemId) {
+    public ResponseEntity<Optional<ItemEntity>> getItemDetail(String itemId) {
         return new ResponseEntity<>(itemDao.findById(itemId), HttpStatus.OK);
     }
 }
