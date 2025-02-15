@@ -1,7 +1,7 @@
 package com.system_design.lld.design_patterns.observer_design_pattern.service_impl;
 
 import com.system_design.lld.design_patterns.observer_design_pattern.dao.UserDao;
-import com.system_design.lld.design_patterns.observer_design_pattern.dto.UserDto;
+import com.system_design.lld.design_patterns.observer_design_pattern.entity.UserEntity;
 import com.system_design.lld.design_patterns.observer_design_pattern.service.UserObserver;
 import com.system_design.lld.design_patterns.observer_design_pattern.service.ItemSubject;
 import com.system_design.lld.design_patterns.observer_design_pattern.util.NotificationMode;
@@ -24,20 +24,20 @@ public class ItemSubjectImpl implements ItemSubject {
     UserObserver userObserver;
 
     @Override
-    public ResponseEntity<UserDto> registerObserver(UserDto user) {
+    public ResponseEntity<UserEntity> registerObserver(UserEntity user) {
         return new ResponseEntity<>(userDao.insert(user), HttpStatus.OK);
     }
 
     @Override
-    public void deregisterObserver(UserDto user) {
+    public void deregisterObserver(UserEntity user) {
         userDao.delete(user);
     }
 
     @Override
-    public  Map<UserDto, List<NotificationMode>> notifyObservers(String itemId) {
-        List<UserDto> users = userDao.findAllByItemId(itemId);
-        Map<UserDto, List<NotificationMode>> userNotificationModeMap = new HashMap<>();
-        for (UserDto user : users) {
+    public  Map<UserEntity, List<NotificationMode>> notifyObservers(String itemId) {
+        List<UserEntity> users = userDao.findAllByItemId(itemId);
+        Map<UserEntity, List<NotificationMode>> userNotificationModeMap = new HashMap<>();
+        for (UserEntity user : users) {
             List<NotificationMode> notificationModes = new ArrayList<>();
             notificationModes = userObserver.notify(user);
             userNotificationModeMap.put(user, notificationModes);
