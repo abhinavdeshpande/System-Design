@@ -1,6 +1,6 @@
 package com.system_design.lld.design_patterns.factory_design_pattern.service_impl;
 
-import com.system_design.lld.design_patterns.factory_design_pattern.dao.FDPOrderRepository;
+import com.system_design.lld.design_patterns.factory_design_pattern.dao.FDP_OrderRepository;
 import com.system_design.lld.design_patterns.factory_design_pattern.dto.OrderResponseDTO;
 import com.system_design.lld.design_patterns.factory_design_pattern.dto.OrderRequestDTO;
 import com.system_design.lld.design_patterns.factory_design_pattern.entity.OrderEntity;
@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FDPOrderServiceImpl implements OrderService {
+public class FDP_OrderServiceImpl implements OrderService {
     @Autowired
     private PaymentFactory paymentFactory;
 
     @Autowired
-    private FDPOrderRepository FDPOrderRepository;
+    private FDP_OrderRepository orderRepository;
 
     @Override
     public OrderResponseDTO processOrder(OrderRequestDTO requestDTO) {
@@ -31,7 +31,7 @@ public class FDPOrderServiceImpl implements OrderService {
             order.setProcessed(paymentSuccess);
 
             // Save to MongoDB
-            OrderEntity savedOrder = FDPOrderRepository.save(order);
+            OrderEntity savedOrder = orderRepository.save(order);
 
             // Convert Entity to Response DTO
             return new OrderResponseDTO(
